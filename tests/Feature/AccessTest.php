@@ -33,6 +33,20 @@ class AccessTest extends TestCase
     }
 
     /** @test */
+    function guest_cannot_see_create_post_form()
+    {
+        $this->get(route('posts.create'))
+             ->assertRedirect(route('login'));
+    }
+
+    /** @test */
+    function guest_cannot_see_edit_post_form()
+    {
+        $this->get(route('post.edit'))
+             ->assertRedirect(route('login'));
+    }
+
+    /** @test */
     function registered_user_can_access_to_users_list()
     {
         $user_1 = factory(User::class)->create();
