@@ -42,7 +42,9 @@ class AccessTest extends TestCase
     /** @test */
     function guest_cannot_see_edit_post_form()
     {
-        $this->get(route('post.edit'))
+        $post = factory(Post::class)->create();
+
+        $this->get(route('posts.edit', $post->id))
              ->assertRedirect(route('login'));
     }
 
